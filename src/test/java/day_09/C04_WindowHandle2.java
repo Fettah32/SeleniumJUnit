@@ -65,6 +65,14 @@ Bir önceki pencereye geri döndükten sonra sayfa başlığının “The Intern
 
         //Click Here butonuna basın.
         driver.findElement(By.xpath("//a[text() = 'Click Here']")).click();
+        Thread.sleep(2000);
+        /*
+        Bir web sitesine gittiginizde bir web elementi tikladiginizda yeni bir sekme ya da pencere acilirsa
+        bu yeni acilan semenin handle degerini bulabilmek icin driver.getWindowHandles() method'unu bir
+        ArrayList'e atip butun sayfalarin listesine ulasabilirim. Ilk actigim pencerenin index'i 0(sifir) dir.
+        Ikinci acilan sekmenin index'i 1(bir) dir ve ikinci acilan pencerede ya da sekmede islem yapabilmek icin
+        driver.switchTo().window(windowList.get(1)) method'unu kullaniriz.
+         */
         List<String> windowList = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(windowList.get(1));
 
@@ -81,6 +89,17 @@ Bir önceki pencereye geri döndükten sonra sayfa başlığının “The Intern
         0 ilk sayfanın WindowHandle değerini, 1 ise ikinci sayfanın WindowHandle değerini verir.
         */
 
+        /*
+        Set<String> windowHandleseti= driver.getWindowHandles();
+        System.out.println(windowHandleseti);
+        String ikinciSayfaWindowHandleDegeri="";
+        for (String each: windowHandleseti) {
+            if (!each.equals(ilkSayfaWindowHandleDegeri)){
+                ikinciSayfaWindowHandleDegeri=each;
+            }
+        }
+         */
+
 
         //Acilan yeni pencerenin sayfa başlığının (title) “New Window” oldugunu dogrulayin.
         String actualTitle2 = driver.getTitle();
@@ -93,8 +112,9 @@ Bir önceki pencereye geri döndükten sonra sayfa başlığının “The Intern
         Assert.assertEquals(actualText2, expectedText2);
 
         //Bir önceki pencereye geri döndükten sonra sayfa başlığının “The Internet” olduğunu  doğrulayın.
-        driver.switchTo().window(ilkSayfaHandleDegeri);
+        driver.switchTo().window(windowList.get(0));
         Assert.assertTrue(actualTitle.contains(expectedTitle));
+
 
     }
 }

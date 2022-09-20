@@ -1,7 +1,6 @@
 package BulutluozDersler.day_07;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.checkerframework.checker.units.qual.C;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
