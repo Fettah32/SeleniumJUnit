@@ -30,8 +30,9 @@ public class C06_KeyboardActions extends TestBaseBeforeAfter {
         actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys("30");
         actions.sendKeys(Keys.TAB).sendKeys("Kas");
         actions.sendKeys(Keys.TAB).sendKeys("1994");
-        actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys(Keys.ENTER);
-        actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).perform();
+        actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys(Keys.ARROW_DOWN);
+        actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys(Keys.TAB).
+                sendKeys(Keys.TAB).sendKeys(Keys.ENTER).perform();
 
         Thread.sleep(5000);
 
