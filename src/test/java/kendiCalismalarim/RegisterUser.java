@@ -64,10 +64,10 @@ public class RegisterUser {
         Assert.assertTrue("Webelement gorunmuyor hata", newUserWE.isDisplayed());
         // 6. Enter name and email address
         WebElement name = driver.findElement(By.xpath("//input[@data-qa='signup-name']"));
-        name.sendKeys("ghost4d35");
+        name.sendKeys("ghost4d356");
         Thread.sleep(2000);
         WebElement email = driver.findElement(By.xpath("//input[@data-qa='signup-email']"));
-        email.sendKeys("ghost43215d@gmail.com");
+        email.sendKeys("ghost43215d6@gmail.com");
         Thread.sleep(2000);
         // 7. Click 'Signup' button
         driver.findElement(By.xpath("//button[@data-qa='signup-button']")).click();

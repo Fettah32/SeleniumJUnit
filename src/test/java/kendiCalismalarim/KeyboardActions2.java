@@ -40,12 +40,11 @@ public class KeyboardActions2 extends TestBaseBeforeAfter {
         playButton.click();
 
         //    videoyu calistirdiginizi test edin
-        WebElement video = driver.findElement(By.xpath("//*[@class='video-stream html5-main-video']"));
-        Thread.sleep(10000);
-        actions.moveToElement(video).perform();
-        WebElement pause = driver.findElement(By.xpath("//*[@title='Duraklat (k)']"));
-        Assert.assertTrue(pause.isDisplayed());
+        Thread.sleep(2000);
+        WebElement duraklatButonu = driver.findElement(By.xpath("//*[@title='Duraklat (k)']"));
+        Assert.assertTrue(duraklatButonu.isEnabled());
+        driver.switchTo().defaultContent( );
 
-        Thread.sleep(15000);
+        Thread.sleep(7000);
     }
 }

@@ -12,7 +12,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="com.Batch81JUnit" options="--add-exports java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED" />
+      <module name="com.Batch81JUnit" options="" />
     </option>
   </component>
 </project>

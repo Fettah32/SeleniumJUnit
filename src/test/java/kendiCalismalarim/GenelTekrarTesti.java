@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.support.locators.RelativeLocator;
 import org.openqa.selenium.support.ui.Select;
 import utilities.TestBaseBeforeAfter;
@@ -14,7 +15,6 @@ import java.nio.file.Watchable;
 import java.util.Arrays;
 import java.util.List;
 
-import static sun.security.krb5.internal.KDCOptions.with;
 
 public class GenelTekrarTesti extends TestBaseBeforeClassAfterClass {
     /*
@@ -90,6 +90,62 @@ public class GenelTekrarTesti extends TestBaseBeforeClassAfterClass {
 
 
         //        ürünün title'ni ve fiyatını variable’a  assign edip ürünü sepete ekleyelim
+        String urunTitle = driver.findElement(By.xpath("//span[@id = 'productTitle']")).getText();
+        String urunPrice = driver.findElement(By.xpath("(//span[@class = 'a-offscreen'])[7]")).getText();
+        driver.findElement(By.id("add-to-cart-button")).click();
+
+    }
+
+    @Test
+    public void test03() throws Exception {
+        // yeni bir sekme açarak amazon anasayfaya gidin
+        driver.switchTo().newWindow(WindowType.TAB);
+        driver.get("https://www.amazon.com");
+
+        //        dropdown’dan bebek bölümüne secin
+        WebElement dropDownMenu = driver.findElement(By.xpath("//*[@id = 'searchDropdownBox']"));
+        Select select = new Select(dropDownMenu);
+        select.selectByVisibleText("Baby");
+
+
+        //        bebek puset aratıp bulundan sonuç sayısını yazdırın
+        driver.findElement(By.id("twotabsearchtextbox")).sendKeys("baby stroller", Keys.ENTER);
+        WebElement sonuc = driver.findElement(By.xpath("(//div[@class = 'a-section a-spacing-small a-spacing-top-small'])[1]"));
+        String sonucYazisi = sonuc.getText();
+        System.out.println(sonucYazisi);
+
+        Arrays.stream(sonuc.getText().split(" ")).limit(3).skip(2).forEach(System.out::println);
+
+
+        //        sonuç yazsının puset içerdiğini test edin
+        String expectedVocabulary = "stroller";
+        Assert.assertTrue(sonucYazisi.contains(expectedVocabulary));
+
+        //        üçüncü ürüne relative locater kullanarak tıklayin
+        WebElement ikinciUrun = driver.findElement(By.xpath("(//div[@class = 'a-section aok-relative s-image-fixed-height'])[2]"));
+        driver.findElement(RelativeLocator.with(By.tagName("img")).below(ikinciUrun)).click();
+
+        //        title ve fiyat bilgilerini assign edelim ve ürünü sepete ekleyin
+        String urunTitle = driver.findElement(By.xpath("//span[@id = 'productTitle']")).getText();
+        System.out.println(urunTitle);
+        String urunFiyat = driver.findElement(By.xpath("(//span[@class = 'a-offscreen'])[2]")).getText();
+        System.out.println(urunFiyat);
+        driver.findElement(By.xpath("//span[@id = 'exportAlternativeTriggerButton-announce']")).click();
+        driver.findElement(By.xpath("//span[@id = 'a-autoid-0-announce']")).click();
+
+    }
+
+    @Test
+    public void test04() throws Exception {
+        //  1-sepetteki ürünlerle eklediğimiz ürünlerin aynı olduğunu isim ve fiyat olarak doğrulayın
+        driver.findElement(By.xpath("(//a[@class = 'a-button-text'])[1]")).click();
+        String sepetBabyStroller = driver.findElement(By.xpath("(//span[@class = 'a-truncate-cut'])[1]")).getText();
+
+        String urunTitle = driver.findElement(By.xpath("//span[@id = 'productTitle']")).getText();
+
+        Assert.assertEquals(urunTitle, sepetBabyStroller);
+
+
     }
 
 
